@@ -11,7 +11,7 @@
 Ext.ns("Inkpod.widget.form");
 
 Inkpod.widget.form.ColorForm = Ext.extend(Ext.Component, {
-	
+    
     cls: 'ikp-color-form',
     
     /**
@@ -30,17 +30,17 @@ Inkpod.widget.form.ColorForm = Ext.extend(Ext.Component, {
     enableHandle: true,
     
     /**
-	 * Initialize
-	 */
-	 initComponent: function() {
-		var that = this;
-		
-		Inkpod.widget.form.ColorForm.superclass.initComponent.call(that);
-		
-		that.colorPickerTarget = that.colorPickerTarget || Ext.id();
-		
-	},
-	
+     * Initialize
+     */
+     initComponent: function() {
+        var that = this;
+        
+        Inkpod.widget.form.ColorForm.superclass.initComponent.call(that);
+        
+        that.colorPickerTarget = that.colorPickerTarget || Ext.id();
+        
+    },
+    
     /**
      * render elements
      */
@@ -101,31 +101,31 @@ Inkpod.widget.form.ColorForm = Ext.extend(Ext.Component, {
         });
         
     },
-	
-	/**
-	 * Get color value
-	 */
-	getValue: function() {
-	    var that = this;
-	    if (that.rendered) {
-	        return that.colorPickerTarget.getValue();
-	    } else {
-	        return that.color;
-	    }
-	},
+    
+    /**
+     * Get color value
+     */
+    getValue: function() {
+        var that = this;
+        if (that.rendered) {
+            return that.colorPickerTarget.getValue();
+        } else {
+            return that.color;
+        }
+    },
 
-	/**
-	 * Set color value.
-	 */	
-	setValue: function(value) {
-	    var that = this;
-	    if (that.rendered) {
-	        that.colorPickerTarget.dom.value = value;
-	    } else {
-	        that.color = value;
-	    }
-	}
-	
+    /**
+     * Set color value.
+     */    
+    setValue: function(value) {
+        var that = this;
+        if (that.rendered) {
+            that.colorPickerTarget.dom.value = value;
+        } else {
+            that.color = value;
+        }
+    }
+    
 });
 
 // register xtype

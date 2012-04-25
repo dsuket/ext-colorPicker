@@ -14,32 +14,32 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
     cls: 'ikp-color-set',
 
     /**
-     * @cfg {Array} colors 色設定
+     * @cfg {Array} colors CSS Colors.
      */
     colors: null,
     
     /**
-     * ColorFormの配列
+     * Array of ColorForm
      */
     colorForms: null,
 
     /**
-     * Colorフィールドのクラス
+     * ColorForm class
      */
     colorFormCls: 'ikp-color-form',
     
     /**
-     * Colorフィールドの入る要素
+     * ColorForm container element
      */
     colorFormContainerEl: null,
     
     /**
-     * 追加ボタン コンポーネント
+     * add button
      */
     addButton: null,
     
 	/**
-	 * 初期化
+	 * Initialize
 	 */
     initComponent: function() {
         var that = this;
@@ -50,7 +50,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 	
 	/**
-	 * 描画
+	 * render color set.
 	 */
     afterRender : function(ct, position) {
 		var that = this,
@@ -60,14 +60,14 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
         Inkpod.widget.form.ColorSet.superclass.afterRender.call(that, ct, position);
 
         var bodyEl = that.bodyEl;
-		// colorFormのコンテンツ
+		// colorForm Container
         var colorFormContainerEl = bodyEl.createChild({
             tag: 'div',
             cls: 'color-form-container'
         });
         that.colorFormContainerEl = colorFormContainerEl;
         
-		// 追加ボタンを作成
+		// create addButton
 		that.addButton = new Ext.Button({
 			cls: 'add-color-button',
 			text: 'add',
@@ -80,12 +80,12 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 			}
 		});
 
-		// カラーの追加
+		// initial colors
 		if (that.colors) {
 		    that.setValue(that.colors);
         }
 		
-		// 並び替え
+		// sorting colorForm
 		that.sortable = new Ext.util.Sortable(colorFormContainerEl, {
 			constrain: colorFormContainerEl,
 			direction: 'vertical',
@@ -112,8 +112,8 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 
 	/**
-	 * 引数の el が colorForms に含まれる index を返す。
-	 * 無い場合は -1 を返す 
+	 * Retun index of el in colorForms.
+	 * if not found, return -1
 	 */
 	indexOfColorForm: function(el) {
 		var that = this,
@@ -128,9 +128,9 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 	
 	/**
-	 * カラーフィールドを追加する
+	 * add ColorForm component
 	 * 
-	 * @return 作成したカラーフィールド要素
+	 * @return colorFiled element
 	 */
 	addColorForm: function(color, animation) {
 		var that = this,
@@ -145,7 +145,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 			color: color,
 			renderTo: colorFormContainerEl
 		});
-		// アニメーション
+		// animation
 		if (animation) {
 			Ext.Anim.run(colorForm.el, 'fade', {
 				out: false
@@ -153,11 +153,11 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 		}
         colorForms.push(colorForm);
 
-		// 削除ボタンのリスナー
+		// delete button listener
 		colorForm.addListener('destroy', function(ev){
 		    colorForms.remove(colorForm);
 		    
-		    // サイズを一時設定
+		    // CSS huck
             var height = that.getBodyHeight() + that.el.getBorderWidth('tb');
             that.setHeight(height);
             Inkpod.logger.debug("set tmp height: " + height);
@@ -188,7 +188,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 
 	/**
-	 * 色の配列をセット
+	 * Set Array of color
 	 */
 	setValue: function(colors) {
 	    var that = this;
@@ -208,7 +208,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 	
 	/**
-	 * 色の配列を所得
+	 * Get Array of color
 	 */
 	getValue: function() {
 	    var that = this,
@@ -228,7 +228,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 	},
 	
 	/**
-	 * カラーフィールドを全削除
+	 * delete all colorForms
 	 */
 	clearColorForms: function() {
 		var that = this,
@@ -238,7 +238,7 @@ Inkpod.widget.form.ColorSet = Ext.extend(Inkpod.widget.form.Field, {
 		if (colorForms && colorForms.length > 0) {
 		    colorFormContainerEl.select('.'+that.colorFormCls).remove();
 	        colorForms.clear();
-            // サイズを一時設定
+            // CSS huck
             var height = that.getBodyHeight() + that.el.getBorderWidth('tb');
             that.setHeight(height);
             that.setHeight(null);
